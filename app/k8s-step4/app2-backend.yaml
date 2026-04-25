@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2-backend
+  namespace: lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app2-backend
+  template:
+    metadata:
+      labels:
+        app: app2-backend
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: app2-backend
+          image: app2-backend:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_ENV
+              value: "dev"
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: DB_HOST
+              value: "db"
+            - name: DB_NAME
+              value: "appdb"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app2-backend
+  namespace: lab
+spec:
+  type: ClusterIP
+  selector:
+    app: app2-backend
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000
