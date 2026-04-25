@@ -93,3 +93,12 @@ devsecops-kubernetes-security-project/
 │   └── network policy files
 │
 └── README.md
+
+After applying the corrections, the initial attack chain was blocked.
+
+The project highlights the importance of integrating security early in the development lifecycle and continuously validating the security of Kubernetes environments.
+
+Note
+
+This project was created in a lab environment for educational purposes.
+Some configurations were intentionally simplified to clearly demonstrate the DevSecOps approach.
